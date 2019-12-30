@@ -1,0 +1,231 @@
+version: "3.7"
+
+networks:
+  javanet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  es:
+  mysql:
+  mq-logs:
+  mq-store:
+  mq-console-tmp:
+  nacos-logs:
+  zk-data:
+  zk-datalog:
+  zk-logs:
+
+services:
+
+  crm:
+    image: openjdk:8-jdk-alpine
+    container_name: crm
+    volumes:
+      - ./jar/crm.jar:/app.jar
+      - ./logs/crm:/logs
+    ports:
+      - 8081:8081
+    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.cloud.config.profile=test -Duser.timezone=GMT+08 -jar app.jar
+    networks:
+      - javanet
+  order:
+    image: openjdk:8-jdk-alpine
+    container_name: order
+    volumes:
+      - ./jar/order.jar:/app.jar
+    ports:
+      - 8091:8091
+    command: java -jar app.jar -Djava.security.egd=file:/dev/./urandom
+    networks:
+      - javanet
+
+  dump:
+    image: openjdk:8-jdk-alpine
+    container_name: dump
+    volumes:
+      - ./jar/dump.jar:/app.jar
+      - ./logs/dump:/logs
+    ports:
+      - 8082:8082
+    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.cloud.config.profile=test -jar app.jar
+    networks:
+      - javanet
+
+  crm-gateway:
+    image: openjdk:8-jdk-alpine
+    container_name: crm-gateway
+    volumes:
+      - ./jar/crm-gateway.jar:/app.jar
+      - ./logs/crm-gateway:/logs
+    ports:
+      - 8083:8083
+    command: java -jar app.jar -Djava.security.egd=file:/dev/./urandom
+    networks:
+      - javanet
+
+  crm-register:
+    image: openjdk:8-jdk-alpine
+    container_name: crm-register
+    volumes:
+      - ./jar/crm-register.jar:/app.jar
+    ports:
+      - 8899:8899
+    command: java -jar app.jar -Djava.security.egd=file:/dev/./urandom
+    networks:
+      - javanet
+
+  logstash:
+    image: logstash:6.5.4
+    container_name: logstash
+    volumes:
+      - ./es/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./es/logstash/config:/usr/share/logstash/config
+    environment:
+      - ELASTICSEARCH_URL="http://es:9200" 
+    networks:
+      - javanet
+    ports:
+      - 5044:5044
+      - 9600:9600  
+  # nacos:
+  #   image: nacos/nacos-server:latest
+  #   container_name: nacos
+  #   volumes:
+  #     - nacos-logs:/home/nacos/logs
+  #     - ./nacos/application.properties:/home/nacos/conf/application.properties
+  #   environment:
+  #     - PREFER_HOST_MODE=hostname
+  #     - MODE=standalone
+  #     - SPRING_DATASOURCE_PLATFORM=mysql
+  #     - MYSQL_MASTER_SERVICE_HOST=mysql
+  #     - MYSQL_MASTER_SERVICE_PORT=3306
+  #     - MYSQL_MASTER_SERVICE_USER=root
+  #     - MYSQL_MASTER_SERVICE_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #     - MYSQL_MASTER_SERVICE_DB_NAME=nacos_config
+  #  ports:
+  #      - 5044:5044
+  #      - 9600:9600 
+  #   networks:
+  #     - javanet
+
+  rocketmq:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rocketmq
+    volumes:
+      - mq-logs:/root/logs
+      - mq-store:/root/store
+    ports:
+      - 9876:9876
+    command: sh mqnamesrv
+    networks:
+      - javanet
+
+  broker:
+    image: rocketmqinc/rocketmq:latest
+    container_name: broker
+    volumes:
+      - mq-logs:/root/logs
+      - mq-store:/root/store
+      - ./rocketmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+    command: sh mqbroker -n rocketmq:9876 -c ../conf/broker.conf
+    ports:
+      - 10909:10909
+      - 10911:10911
+      - 10912:10912
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/jre
+    networks:
+      - javanet
+
+  rocketmq-console:
+    image: styletang/rocketmq-console-ng
+    container_name: rocketmq-console
+    ports:
+      - 8080:8080
+    volumes:
+      - mq-console-tmp:/tmp
+    environment:
+      - JAVA_OPTS= -Dlogging.level.root=info -Drocketmq.namesrv.addr=rocketmq:9876
+      - Dcom.rocketmq.sendMessageWithVIPChannel=false
+    networks:
+      - javanet
+
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    volumes:
+      - zk-data:/data
+      - zk-datalog:/datalog
+      - zk-logs:/logs
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    networks:
+      - javanet
+
+  canal:
+    image: canal/canal-server:latest
+    container_name: canal
+    volumes:
+      - ./canal/canal.properties:/home/admin/canal-server/conf/canal.properties
+      - ./canal/canal_local.properties:/home/admin/canal-server/conf/canal_local.properties
+      - ./canal/instance.properties:/home/admin/canal-server/conf/example/instance.properties
+    ports:
+      - 11111:11111
+      - 11112:11112
+      - 2222:2222
+      - 8000:8000
+    networks:
+      - javanet
+
+  nginx:
+    image: hugtale/nginx:stable
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - javanet
+
+  es:
+    image: hugtale/elasticsearch:${ES_VERSION}
+    container_name: es
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - es:/usr/share/elasticsearch/data:cached
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - javanet
+
+  kibana:
+    image: hugtale/kibana:${ES_VERSION}
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL="http://es:9200"
+    ports:
+      - 5601:5601
+    networks:
+      - javanet
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - mysql:/var/lib/mysql:cached
+      - ${TIMEZONE}:/etc/localtime
+    ports:
+      - 3306:3306
+    networks:
+      - javanet
