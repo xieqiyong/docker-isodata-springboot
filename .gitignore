@@ -1,0 +1,11 @@
+composer
+data
+src
+httpd
+nginx/conf.d/*.conf
+nginx/conf.d/*.bak
+es/config
+acm
+.env
+docker-compose.yml
+jar

@@ -1,0 +1,77 @@
+2019-12-13 16:17:14.179  INFO 7289 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$8a903282] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.1.RELEASE)
+
+2019-12-13 16:17:14.321  INFO 7289 --- [           main] c.hzrys.crm.gateway.GatewayApplication   : No active profile set, falling back to default profiles: default
+2019-12-13 16:17:14.749  INFO 7289 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=b8d33c4b-a0f7-3aa0-9773-7b748644abc7
+2019-12-13 16:17:14.816  INFO 7289 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$8a903282] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-13 16:17:14.935  WARN 7289 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-12-13 16:17:14.935  INFO 7289 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-12-13 16:17:14.940  WARN 7289 --- [           main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2019-12-13 16:17:14.940  INFO 7289 --- [           main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2019-12-13 16:17:15.570  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2019-12-13 16:17:15.571  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2019-12-13 16:17:15.571  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2019-12-13 16:17:15.571  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBodyPredicateFactory]
+2019-12-13 16:17:15.571  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2019-12-13 16:17:15.571  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2019-12-13 16:17:15.571  INFO 7289 --- [           main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2019-12-13 16:17:15.927  INFO 7289 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2019-12-13 16:17:15.960  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2019-12-13 16:17:16.084  INFO 7289 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2019-12-13 16:17:16.084  INFO 7289 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2019-12-13 16:17:16.215  INFO 7289 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2019-12-13 16:17:16.215  INFO 7289 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2019-12-13 16:17:16.443  INFO 7289 --- [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2019-12-13 16:17:16.460  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2019-12-13 16:17:16.611  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2019-12-13 16:17:16.614  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2019-12-13 16:17:16.616  INFO 7289 --- [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2019-12-13 16:17:16.618  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1576225036617 with initial instances count: 9
+2019-12-13 16:17:16.619  INFO 7289 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application CRM-GATEWAY with eureka with status UP
+2019-12-13 16:17:16.619  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1576225036619, current=UP, previous=STARTING]
+2019-12-13 16:17:16.621  INFO 7289 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CRM-GATEWAY/java-60:crm-gateway:8690: registering service...
+2019-12-13 16:17:16.689  INFO 7289 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CRM-GATEWAY/java-60:crm-gateway:8690 - registration status: 204
+2019-12-13 16:17:16.731  INFO 7289 --- [           main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-13 16:17:16.732  INFO 7289 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application CRM-GATEWAY with eureka with status DOWN
+2019-12-13 16:17:16.732  WARN 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1576225036732, current=DOWN, previous=UP]
+2019-12-13 16:17:16.732  INFO 7289 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CRM-GATEWAY/java-60:crm-gateway:8690: registering service...
+2019-12-13 16:17:16.736  INFO 7289 --- [nfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CRM-GATEWAY/java-60:crm-gateway:8690 - registration status: 204
+2019-12-13 16:17:16.742  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2019-12-13 16:17:19.743  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2019-12-13 16:17:19.755  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CRM-GATEWAY/java-60:crm-gateway:8690 - deregister  status: 200
+2019-12-13 16:17:19.761  INFO 7289 --- [           main] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2019-12-13 16:17:19.763 ERROR 7289 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8690 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8690 or configure this application to listen on another port.
+
